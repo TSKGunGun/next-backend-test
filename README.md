@@ -1,3 +1,7 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-backend-test&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-backend-test)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-backend-test&metric=bugs)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-backend-test)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-backend-test&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-backend-test)
+
 # Next-BackEnd-Test
 Nextアプリケーション単独でSaasを実装するための検証リポジトリです。
 

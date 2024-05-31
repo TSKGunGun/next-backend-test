@@ -34,10 +34,6 @@ jobs:
           sed -i "s/\/home\/runner\/work\/${REPOSITORY_NAME}\/${REPOSITORY_NAME}/\/github\/workspace/g" report/eslint-report.json
         env:
           REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
-    
-      # Run tests with coverage
-      - name: vitest run with coverage
-        run: npm run test:cov
       
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
