@@ -1,30 +1,36 @@
 import AuthRepository from "../_repository/AuthRepository";
 import { User } from "../_types/user";
 
-const auth = new AuthRepository();
 
-function login(email:string, password:string): User|null {
-  let user=null;
-  try{
-    user = auth.login(email, password);
-  } catch(e) {
-    console.error(e);
-    return null;
+export default class AuthService {
+  private auth: AuthRepository;
+
+  constructor() {
+    this.auth = new AuthRepository();
   }
 
-  return user;
+  async login(email:string, password:string): Promise<User|null> {
+    let user=null;
+    try{
+      user = await this.auth.login(email, password);
+    } catch(e) {
+      console.error(e);
+      return null;
+    }
+  
+    return user;
+  }
+  
+  async logout(): Promise<void> {
+    return this.auth.logout();
+  }
+  
+  async isLogin(): Promise<boolean> {
+    return this.auth.islogin();
+  }
+  
+  async register(email: string, password: string): Promise<User> {
+    return this.auth.register(email, password);
+  }
+  
 }
-
-function logout(): void {
-  auth.logout();
-}
-
-function isLogin(): boolean {
-  return auth.islogin();
-}
-
-async function register(email: string, password: string): Promise<User> {
-  return await auth.register(email, password);
-}
-
-export { login, logout, isLogin, register }

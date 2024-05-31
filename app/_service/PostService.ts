@@ -1,24 +1,32 @@
 import { Post } from '@/app/_types/post';
+import { Posts } from '@/app/_types/posts';
 import PostRepository from '../_repository/PostRepository';
 
-const postRepository = new PostRepository();
+export default class PostService {
+  private repo: PostRepository;
 
-export function store(post: Post) {
-  return postRepository.store(post);
+  constructor() {
+    this.repo = new PostRepository();
+  }
+
+  async store(post: Post) : Promise<Post>{
+    return await this.repo.store(post);
+  }
+  
+  async update(post: Post) : Promise<Post>{
+    return await this.repo.update(post);
+  }
+  
+  async remove(id: string) : Promise<void>{
+    return await this.repo.delete(id);
+  }
+  
+  async find(id: string) : Promise<Post>{
+    return await this.repo.find(id);
+  }
+  
+  async getAll() : Promise<Posts>{
+    return await this.repo.getAll();
+  }
 }
 
-export function update(post: Post) {
-  return postRepository.update(post);
-}
-
-export function remove(id: string) {
-  return postRepository.delete(id);
-}
-
-export function find(id: string) {
-  return postRepository.find(id);
-}
-
-export function getAll() {
-  return postRepository.getAll();
-}

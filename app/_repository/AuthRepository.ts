@@ -5,22 +5,25 @@ export default class AuthRepository {
     console.log('AuthRepository constructor');
   }
 
-  login(email:string, password:string): User {
+  async login(email:string, password:string): Promise<User|null> {
+    await new Promise(resolve => setTimeout(resolve, 500));
     return {
       uid: '123',
       email: 'test@example.com'
     };
   }
 
-  islogin(): boolean {
+  async islogin(): Promise<boolean> {
+    await new Promise(resolve => setTimeout(resolve, 500));
     return true;
   }
 
-  logout(): void{
-    return;
+  async logout(): Promise<void>{
+    await new Promise(resolve => setTimeout(resolve, 500));
   }
 
-  register(email: string, password: string): User {
+  async register(email: string, password: string): Promise<User> {
+    await new Promise(resolve => setTimeout(resolve, 100));
     return {
       uid: '123',
       email: 'test@example.com'
