@@ -1,0 +1,46 @@
+name: CodeCheck
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+jobs:
+  CodeCheck:
+    name: CodeCheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Instacll dependncies
+        run: npm ci
+
+      # Run linters
+      - name: Run eslint
+        run: npm run lint:json
+        continue-on-error: true
+      
+      # リポジトリ名を環境変数にセット
+      - name: Set REPOSITORY_NAME
+        run: echo "REPOSITORY_NAME=${GITHUB_REPOSITORY#${GITHUB_REPOSITORY_OWNER}/}" >> $GITHUB_ENV
+    
+      # ESLintのレポートパスの修正
+      # /home/runner/work/***/***/... のパスを /github/workspace/ に変更する
+      - name: Fix ESLint report path
+        run: |
+          sed -i "s/\/home\/runner\/work\/${REPOSITORY_NAME}\/${REPOSITORY_NAME}/\/github\/workspace/g" report/eslint-report.json
+        env:
+          REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
+    
+      # Run tests with coverage
+      - name: vitest run with coverage
+        run: npm run test:cov
+      
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
