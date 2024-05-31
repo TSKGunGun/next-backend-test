@@ -1,30 +1,32 @@
 'use client'
 
 import { Typography } from "@mui/material";
-import { getAll } from "./_service/PostService";
+import PostService from "./_service/PostService";
 import PostCard from "./_components/PostCard";
 import { Post } from "./_types/post";
 import { Posts } from "./_types/posts";
 import Box from "@mui/material/Box";
-import { isLogin } from "./_service/AuthService";
+import AuthService from "./_service/AuthService";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const router = useRouter();
   const [posts, setPosts] = useState<Posts>();
+  const postService = new PostService();
+  const authService = new AuthService();
 
   useEffect(() => {
-    if(!isLogin()) {
-      console.log('ログインしていません');
-      router.push('/login');
+    const loading = async () => {
+      if( ! await authService.isLogin()) {
+        console.log('ログインしていません');
+        router.push('/login');
+      }
+
+      setPosts(await postService.getAll());
     }
 
-    const loadPosts = async () => {
-      setPosts(await getAll());
-    }
-
-    loadPosts();
+    loading();
   }, [router]);
 
 
@@ -32,7 +34,7 @@ export default function Home() {
     <div className="container">
       <div style={{ textAlign: "center", width: "100%", marginTop: "80px"}}>
         <Typography variant="h3">SampleApp On Firebase</Typography>
-        <Typography variant="body1">APIサーバを使わずFirebaseのみで実行されるサンプルアプリです。</Typography>
+        <Typography variant="body1">APIサーバを使わずNext.jsのみで実行されるサンプルアプリです。</Typography>
         <Typography variant="body1"></Typography>
       </div>
       <Box sx={{display:"flex", flexDirection:"column", alignItems: "center", gap:"20px", marginTop:"50px"}}>
