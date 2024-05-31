@@ -1,9 +1,3 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-on-firebase&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-on-firebase)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-on-firebase&metric=bugs)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-on-firebase)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-on-firebase&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-on-firebase)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-on-firebase&metric=coverage)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-on-firebase)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-on-firebase&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-on-firebase)
-
 # Next-BackEnd-Test
 Nextアプリケーション単独でSaasを実装するための検証リポジトリです。
 
@@ -16,23 +10,20 @@ Nextアプリケーション単独でSaasを実装するための検証リポジ
 
 # 使用技術
 * Next.js
-* Firebase
 * SonarCloud
-* MAUI
-* Zustand
+* MUI
 
 # 品質について
 本リポジトリはSonarCloudにて品質管理を行っています。
-https://sonarcloud.io/project/overview?id=TSKGunGun_next-on-firebase
 
 # システム仕様について
 
 # ホスティングについて
-システムはFirebase AppHostigにてホスティングされます。
-
+vercel, cloudflare等を利用してください。
 
 ## ユーザー認証
-FirebaseのAuthenticationを利用します。
+firebase, supabase等でユーザー管理してください。
+
 
 # 構造
 ## データのやり取りについて
@@ -50,15 +41,12 @@ FirebaseのAuthenticationを利用します。
     ExternalService[外部サービス等]
     Repository[Repository]
     Service[Service]
-    Model[Model]
     UI[UI]
 
     UI --> Model
     UI --> Service
     UI --> Repository
     UI --> ExternalService
-    Model --> Service
-    Model --> Repository
     Service --> Repository
     Repository --> DB
     Repository --> ExternalService
