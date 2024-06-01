@@ -1,6 +1,4 @@
 import { Post } from "@/app/_types/post";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
 import { Avatar, Typography } from "@mui/material";
 import UserService from "../_service/UserService";
