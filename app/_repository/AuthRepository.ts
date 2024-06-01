@@ -10,7 +10,8 @@ export default class AuthRepository {
     return {
       uid: '123',
       name: 'test',
-      email: 'test@example.com'
+      email: 'test@example.com',
+      icon_url: null
     };
   }
 
@@ -28,7 +29,8 @@ export default class AuthRepository {
     return {
       uid: '123',
       name: 'test',
-      email: 'test@example.com'
+      email: 'test@example.com',
+      icon_url: null
     };
   }
 
@@ -37,7 +39,8 @@ export default class AuthRepository {
     return {
       uid: '123',
       name: 'test',
-      email: ''
+      email: '',
+      icon_url: 'https://picsum.photos/200'
     }
   }
 }

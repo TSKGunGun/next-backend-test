@@ -20,7 +20,8 @@ export default class UserRepository implements BaseRepository {
     return {
       "uid": "1",
       "name": "田中太郎",
-      "email": "taro.tanaka@example.com"
+      "email": "taro.tanaka@example.com",
+      "icon_url": "https://picsum.photos/200"
     };
   }
 
@@ -31,11 +32,13 @@ export default class UserRepository implements BaseRepository {
         "uid": "1",
         "name": "田中太郎",
         "email": "taro.tanaka@example.com",
+        "icon_url": "https://picsum.photos/200"
       },
       {
         "uid": "2",
         "name": "山田花子",
         "email": "hanako.yamada@example.com",
+        "icon_url": "https://picsum.photos/200"
       }
     ];
   }
