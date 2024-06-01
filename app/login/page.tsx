@@ -1,24 +1,32 @@
 'use client'
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Button, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
-import { login,isLogin } from "../_service/AuthService";
+import AuthService from "../_service/AuthService";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
   const router = useRouter();
+  const authService = new AuthService();
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   
-  if(isLogin()) {
-    console.log('ログイン済み');
-    router.push('/');
-  }
+  useEffect(() => {
+    const loginCheck = async () => {
+      if(await authService.isLogin()) {
+        console.log('ログイン済み');
+        router.push('/');
+      }
+    }
+
+    loginCheck();
+  
+  }, []);
 
   const loginHandle = async () => {
     if(email.current === null || password.current === null) return;
-    await login(email.current.value, password.current.value);
+    await authService.login(email.current.value, password.current.value);
 
     router.push('/');
   }
