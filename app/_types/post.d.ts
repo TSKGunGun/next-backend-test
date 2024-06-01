@@ -1,6 +1,6 @@
 export interface Post {
   id: number;
-  user_id: string;
+  uid: string;
   message: string;
   created_at: Date;
 }

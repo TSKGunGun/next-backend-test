@@ -9,6 +9,7 @@ export default class AuthRepository {
     await new Promise(resolve => setTimeout(resolve, 500));
     return {
       uid: '123',
+      name: 'test',
       email: 'test@example.com'
     };
   }
@@ -26,14 +27,16 @@ export default class AuthRepository {
     await new Promise(resolve => setTimeout(resolve, 100));
     return {
       uid: '123',
+      name: 'test',
       email: 'test@example.com'
     };
   }
 
-  async getUser(): Promise<User|null> {
+  async getMe(): Promise<User|null> {
     await new Promise(resolve => setTimeout(resolve, 100));
     return {
       uid: '123',
+      name: 'test',
       email: ''
     }
   }

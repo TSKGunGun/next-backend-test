@@ -18,7 +18,7 @@ export default class PostRepository implements BaseRepository {
     
     const post: Post = {
       "id": 1,
-      "user_id": data.user.uid,
+      "uid": data.user.uid,
       "message": data.message,
       "created_at": new Date(),
     };
@@ -39,7 +39,7 @@ export default class PostRepository implements BaseRepository {
     await new Promise(resolve => setTimeout(resolve, 500));
     return {
       "id": 1,
-      "user_id": 1,
+      "uid": "1",
       "message": "今日もいい天気ですね。",
       "created_at": new Date(),
     };
@@ -51,13 +51,13 @@ export default class PostRepository implements BaseRepository {
       data: [
         {
           "id": 1,
-          "user_id": 1,
+          "uid": "1",
           "message": "今日もいい天気ですね。",
           "created_at": new Date(),
         },
         {
           "id": 2,
-          "user_id": 1,
+          "uid": "1",
           "message": "Post 2",
           "created_at": new Date(),
         }
