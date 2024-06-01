@@ -11,18 +11,6 @@ export default function Login() {
   const authService = new AuthService();
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
-  
-  useEffect(() => {
-    const loginCheck = async () => {
-      if(await authService.isLogin()) {
-        console.log('ログイン済み');
-        router.push('/');
-      }
-    }
-
-    loginCheck();
-  
-  }, []);
 
   const loginHandle = async () => {
     if(email.current === null || password.current === null) return;

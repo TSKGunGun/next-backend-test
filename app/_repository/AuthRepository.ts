@@ -15,7 +15,7 @@ export default class AuthRepository {
 
   async islogin(): Promise<boolean> {
     await new Promise(resolve => setTimeout(resolve, 500));
-    return false;
+    return true;
   }
 
   async logout(): Promise<void>{
