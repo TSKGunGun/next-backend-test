@@ -1,5 +1,5 @@
 {
-  "name": "next-backend-test",
+  "name": "base",
   "version": "0.1.0",
   "private": true,
   "scripts": {
