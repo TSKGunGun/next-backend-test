@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation"
 import AuthService from "../_service/AuthService"
 
 interface HeaderButtonGroupProps {
-    isLogin: boolean;
+  readonly isLogin: boolean;
 }
 
 export default function HeaderButtonGroup({ isLogin } : HeaderButtonGroupProps) {

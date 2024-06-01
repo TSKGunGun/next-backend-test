@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Button, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import AuthService from "../_service/AuthService";
