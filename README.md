@@ -1,7 +1,3 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-backend-test&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-backend-test)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-backend-test&metric=bugs)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-backend-test)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=TSKGunGun_next-backend-test&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=TSKGunGun_next-backend-test)
-
 # Next-BackEnd-Test
 Nextアプリケーション単独でSaasを実装するための検証リポジトリです。
 
@@ -10,24 +6,17 @@ Nextアプリケーション単独でSaasを実装するための検証リポジ
 まずは提供サービスのリリースを優先するため当初は簡易的な実装とし、
 ビジネスとして発展が見込まれる場合スケールアップをしていくようなサービスの初回リリース向け想定しています。
 
-バックエンドは組んで居ないため、このリポジトリをフォークしてRepository層でバックエンドと接続してください。
-
 # 使用技術
 * Next.js
-* SonarCloud
 * MUI
+* supabase
 
-# 品質について
-本リポジトリはSonarCloudにて品質管理を行っています。
+# 各ディレクトリについて
 
-# システム仕様について
-
-# ホスティングについて
-vercel, cloudflare等を利用してください。
-
-## ユーザー認証
-firebase, supabase等でユーザー管理してください。
-
+|ディレクトリ| 概要 |
+|:---------------------|:-----------------------------------------------|
+|[base](/base/)|基本実装のディレクトリです。バックエンドと接続の実装はおこなっていません。|
+|[supabase](/supabase/)|supabaseと接続するパターンの実装です。|
 
 # 構造
 ## データのやり取りについて
@@ -60,5 +49,3 @@ firebase, supabase等でユーザー管理してください。
 ※厳密なやり取りが必要な場合はインターフェースではなくtypeで定義することがあります。
 
 APIサーバー化した場合はRepository層を変更することで、ビジネスロジック上で大きな変更無くスケールアップできるようにしています。
-
-# テスト
