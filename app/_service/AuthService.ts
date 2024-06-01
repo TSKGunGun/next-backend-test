@@ -33,8 +33,8 @@ export default class AuthService {
     return this.auth.register(email, password);
   }
 
-  async getUser(): Promise<User|null> {
-    return this.auth.getUser();
+  async getMe(): Promise<User|null> {
+    return this.auth.getMe();
   }
   
 }

@@ -2,7 +2,7 @@
 
 import { Typography } from "@mui/material";
 import PostService from "./_service/PostService";
-import PostCard from "./_components/PostCard";
+import PostCard from "./_components/postcard";
 import { Post } from "./_types/post";
 import { Posts } from "./_types/posts";
 import Box from "@mui/material/Box";

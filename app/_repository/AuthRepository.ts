@@ -9,7 +9,9 @@ export default class AuthRepository {
     await new Promise(resolve => setTimeout(resolve, 500));
     return {
       uid: '123',
-      email: 'test@example.com'
+      name: 'test',
+      email: 'test@example.com',
+      icon_url: null
     };
   }
 
@@ -26,15 +28,19 @@ export default class AuthRepository {
     await new Promise(resolve => setTimeout(resolve, 100));
     return {
       uid: '123',
-      email: 'test@example.com'
+      name: 'test',
+      email: 'test@example.com',
+      icon_url: null
     };
   }
 
-  async getUser(): Promise<User|null> {
+  async getMe(): Promise<User|null> {
     await new Promise(resolve => setTimeout(resolve, 100));
     return {
       uid: '123',
-      email: ''
+      name: 'test',
+      email: '',
+      icon_url: 'https://picsum.photos/200'
     }
   }
 }
