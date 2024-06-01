@@ -1,5 +1,4 @@
 import { Box, TextField, Typography } from "@mui/material";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import { useRef } from "react";
 import Button from "@mui/material/Button";
 import PostService from "../_service/PostService";
@@ -12,7 +11,7 @@ export default function NewPost() {
 
   const handlePost = async () => {
     if(textAreaRef.current === null) return;
-    const user = await authService.getUser();
+    const user = await authService.getMe();
     if(user === null) return;
 
     postService.store(user, textAreaRef.current.value);
