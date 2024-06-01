@@ -1,6 +1,7 @@
 import { Post } from '@/app/_types/post';
 import { Posts } from '@/app/_types/posts';
 import PostRepository from '../_repository/PostRepository';
+import { User } from '../_types/user';
 
 export default class PostService {
   private repo: PostRepository;
@@ -9,8 +10,14 @@ export default class PostService {
     this.repo = new PostRepository();
   }
 
-  async store(post: Post) : Promise<Post>{
-    return await this.repo.store(post);
+
+  async store(user:User, message: string) : Promise<Post>{
+    const data = {
+      user: user,
+      message: message
+    };
+    
+    return await this.repo.store(data);
   }
   
   async update(post: Post) : Promise<Post>{

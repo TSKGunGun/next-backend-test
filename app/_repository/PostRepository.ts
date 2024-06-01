@@ -1,14 +1,28 @@
 import { Post } from '@/app/_types/post';
 import { Posts } from '@/app/_types/posts';
 import BaseRepository from './BaseRepository';
+import { User } from '../_types/user';
+
+interface NewPostProps {
+  user: User;
+  message: string;
+}
 
 export default class PostRepository implements BaseRepository {
   constructor() {
     console.log('PostRepository constructor');
   }
 
-  async store(post: Post): Promise<Post> {
+  async store(data: NewPostProps): Promise<Post> {
     await new Promise(resolve => setTimeout(resolve, 500));
+    
+    const post: Post = {
+      "id": 1,
+      "user_id": data.user.uid,
+      "message": data.message,
+      "created_at": new Date(),
+    };
+    
     return post;
   }
 
