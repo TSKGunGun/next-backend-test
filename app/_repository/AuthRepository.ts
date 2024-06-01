@@ -29,4 +29,12 @@ export default class AuthRepository {
       email: 'test@example.com'
     };
   }
+
+  async getUser(): Promise<User|null> {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    return {
+      uid: '123',
+      email: ''
+    }
+  }
 }
