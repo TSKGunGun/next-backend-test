@@ -19,6 +19,10 @@ export default function Login() {
     router.push('/');
   }
 
+  const registerHandle = async () => {
+    router.push('/register');
+  }
+
   return (
     <div style={{ background: "#eee", height:"100vh",width: "100%",display:"flex", textAlign:"center", justifyContent:"center", alignItems:"center"}}>
       <Box width={400} sx={{ background: "white", display: "flex", flexDirection: "column", padding:"20px", justifyContent:"center", textAlign:"center", border: "1px solid #eee", "borderRadius" : "10px"}}>
@@ -26,7 +30,7 @@ export default function Login() {
         <TextField id="email" label="メールアドレス" variant="outlined" margin="normal" inputRef={email} />
         <TextField id="password" label="パスワード" variant="outlined" type="password" margin="normal" inputRef={password} />
         <Button variant="contained" color="primary" sx={{ "marginTop" : "40px", "marginBottom": "10px"}} onClick={loginHandle}>ログイン</Button>
-        <Button variant="contained" color="secondary" >新規登録</Button>
+        <Button variant="contained" color="secondary" onClick={registerHandle} >新規登録</Button>
       </Box>
     </div>
   )
