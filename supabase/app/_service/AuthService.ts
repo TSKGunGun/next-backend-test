@@ -1,3 +1,4 @@
+import { EmailOtpType, VerifyEmailOtpParams, VerifyOtpParams } from "@supabase/supabase-js";
 import AuthRepository from "../_repository/AuthRepository";
 import { User } from "../_types/user";
 
@@ -22,15 +23,19 @@ export default class AuthService {
   }
   
   async logout(): Promise<void> {
-    return this.auth.logout();
+    return await this.auth.logout();
   }
   
   async isLogin(): Promise<boolean> {
-    return this.auth.islogin();
+    return await this.auth.islogin();
   }
   
   async register(email: string, password: string): Promise<void> {
-    return this.auth.register(email, password);
+    return await this.auth.register(email, password);
+  }
+
+  async confirm(type: EmailOtpType, token:string): Promise<void> {
+    return await this.auth.confirm(type, token);
   }
 
   async getMe(): Promise<User|null> {

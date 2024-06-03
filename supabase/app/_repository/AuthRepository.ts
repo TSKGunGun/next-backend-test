@@ -1,6 +1,6 @@
 import { User } from '@/app/_types/user';
-import { createClient } from '@/app/_utils/supabase/client';
-import type { AuthResponse, SignInWithPasswordCredentials, SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@/app/_utils/supabase/server';
+import type { EmailOtpType, SignInWithPasswordCredentials, SupabaseClient } from '@supabase/supabase-js';
 
 export default class AuthRepository {
   private client: SupabaseClient;
@@ -46,6 +46,12 @@ export default class AuthRepository {
       email: email,
       password: password
     });
+
+    if (error) throw new Error(error.message);
+  }
+
+  async confirm(type :EmailOtpType, token_hash:string): Promise<void> {
+    const {error} = await this.client.auth.verifyOtp({type, token_hash});
 
     if (error) throw new Error(error.message);
   }

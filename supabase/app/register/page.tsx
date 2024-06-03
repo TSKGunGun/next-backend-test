@@ -1,5 +1,3 @@
-'use client'
-
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
 import AuthService from "../_service/AuthService";
@@ -13,7 +11,7 @@ export default function Register() {
   const authService = new AuthService();
   const Router = useRouter();
 
-  const loginHandle = async () => {
+  const registerHandle = async () => {
     if(email.current === null || password.current === null || password_confirm.current === null) return;
     if(password.current.value !== password_confirm.current.value) return;
 
@@ -28,8 +26,8 @@ export default function Register() {
       <h1>新規登録</h1>
       <TextField id="email" label="メールアドレス" variant="outlined" margin="normal" inputRef={email} required/>
       <TextField id="password" label="パスワード" variant="outlined" type="password" margin="normal" inputRef={password} required/>
-      <TextField id="password_confirm" label="パスワード_再入力" variant="outlined" type="password" margin="normal" inputRef={password} required />
-      <Button variant="contained" color="primary" sx={{ "marginTop" : "40px", "marginBottom": "10px"}} onClick={loginHandle}>新規登録</Button>
+      <TextField id="password_confirm" label="パスワード_再入力" variant="outlined" type="password" margin="normal" inputRef={password_confirm} required />
+      <Button variant="contained" color="primary" sx={{ "marginTop" : "40px", "marginBottom": "10px"}} onClick={registerHandle}>新規登録</Button>
       <Typography variant="body2" color={"darkgray"} marginTop={3}>ログインは
         <Link href="/login">こちら</Link>から</Typography>
     </Box>

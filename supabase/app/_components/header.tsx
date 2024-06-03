@@ -1,5 +1,3 @@
-'use client'
-
 import { ReactNode, useEffect, useState } from "react"
 import AuthService from "../_service/AuthService"
 import { AppBar, Typography } from "@mui/material"
