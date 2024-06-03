@@ -38,7 +38,7 @@ export default class AuthRepository {
   }
 
   async logout(): Promise<void>{
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await this.client.auth.signOut();
   }
 
   async register(email: string, password: string): Promise<User> {

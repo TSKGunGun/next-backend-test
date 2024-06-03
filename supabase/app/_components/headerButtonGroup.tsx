@@ -20,6 +20,7 @@ export default function HeaderButtonGroup({ isLogin } : HeaderButtonGroupProps) 
 
   const logoutButtonHandle = () => {
     authService.logout();
+    router.push('/login');
   }
 
   if (isLogin) {
