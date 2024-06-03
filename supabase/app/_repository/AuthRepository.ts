@@ -1,22 +1,39 @@
 import { User } from '@/app/_types/user';
+import { createClient } from '@/app/_utils/supabase/client';
+import type { SignInWithPasswordCredentials, SupabaseClient } from '@supabase/supabase-js';
 
 export default class AuthRepository {
+  private client: SupabaseClient;
+  
   constructor() {
+    this.client = createClient();
     console.log('AuthRepository constructor');
   }
 
   async login(email:string, password:string): Promise<User|null> {
     await new Promise(resolve => setTimeout(resolve, 500));
+    
+    const credentials: SignInWithPasswordCredentials = {
+      email: email,
+      password: password
+    };
+
+    const {data, error}= await this.client.auth.signInWithPassword(credentials);
+    
+    if( error ) throw new Error(error.message);
+
     return {
-      uid: '123',
+      uid: data?.user.id,
       name: 'test',
-      email: 'test@example.com',
-      icon_url: null
+      email: data?.user.email as string,
+      icon_url: 'https://picsum.photos/200'
     };
   }
 
   async islogin(): Promise<boolean> {
-    await new Promise(resolve => setTimeout(resolve, 500));
+    const { error } = await this.client.auth.getUser();
+    if( error ) return false;
+
     return true;
   }
 
@@ -35,11 +52,14 @@ export default class AuthRepository {
   }
 
   async getMe(): Promise<User|null> {
-    await new Promise(resolve => setTimeout(resolve, 100));
+    const { data, error } = await this.client.auth.getUser();
+    
+    if( error ) return null;
+    
     return {
-      uid: '123',
+      uid: data?.user.id,
       name: 'test',
-      email: '',
+      email: data?.user.email as string,
       icon_url: 'https://picsum.photos/200'
     }
   }
