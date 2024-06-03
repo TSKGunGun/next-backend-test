@@ -1,6 +1,6 @@
 import { User } from '@/app/_types/user';
 import { createClient } from '@/app/_utils/supabase/client';
-import type { SignInWithPasswordCredentials, SupabaseClient } from '@supabase/supabase-js';
+import type { AuthResponse, SignInWithPasswordCredentials, SupabaseClient } from '@supabase/supabase-js';
 
 export default class AuthRepository {
   private client: SupabaseClient;
@@ -41,14 +41,13 @@ export default class AuthRepository {
     await this.client.auth.signOut();
   }
 
-  async register(email: string, password: string): Promise<User> {
-    await new Promise(resolve => setTimeout(resolve, 100));
-    return {
-      uid: '123',
-      name: 'test',
-      email: 'test@example.com',
-      icon_url: null
-    };
+  async register(email: string, password: string): Promise<void> {
+    const {error} = await this.client.auth.signUp({
+      email: email,
+      password: password
+    });
+
+    if (error) throw new Error(error.message);
   }
 
   async getMe(): Promise<User|null> {

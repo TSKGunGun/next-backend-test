@@ -29,7 +29,7 @@ export default class AuthService {
     return this.auth.islogin();
   }
   
-  async register(email: string, password: string): Promise<User> {
+  async register(email: string, password: string): Promise<void> {
     return this.auth.register(email, password);
   }
 
