@@ -1,6 +1,8 @@
+"use client"
+
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
-import AuthService from "../_serviceAction/AuthServiceAction";
+import { register } from "../_serviceAction/AuthServiceAction";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -8,14 +10,13 @@ export default function Register() {
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const password_confirm = useRef<HTMLInputElement>(null);
-  const authService = new AuthService();
   const Router = useRouter();
 
   const registerHandle = async () => {
     if(email.current === null || password.current === null || password_confirm.current === null) return;
     if(password.current.value !== password_confirm.current.value) return;
 
-    await authService.register(email.current.value, password.current.value);
+    await register(email.current.value, password.current.value);
 
     Router.push('/');
   }
