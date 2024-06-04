@@ -1,71 +1,68 @@
+"use server"
+
 import { User } from '@/app/_types/user';
 import { createClient } from '@/app/_utils/supabase/server';
-import type { EmailOtpType, SignInWithPasswordCredentials, SupabaseClient } from '@supabase/supabase-js';
+import type { EmailOtpType, SignInWithPasswordCredentials } from '@supabase/supabase-js';
 
-export default class AuthRepository {
-  private client: SupabaseClient;
+function getClient() {
+  return createClient();
+} 
   
-  constructor() {
-    this.client = createClient();
-    console.log('AuthRepository constructor');
-  }
+export async function login(email:string, password:string): Promise<User|null> {
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  const credentials: SignInWithPasswordCredentials = {
+    email: email,
+    password: password
+  };
 
-  async login(email:string, password:string): Promise<User|null> {
-    await new Promise(resolve => setTimeout(resolve, 500));
+  const {data, error}= await getClient().auth.signInWithPassword(credentials);
+  
+  if( error ) throw new Error(error.message);
+
+  return {
+    uid: data?.user.id,
+    name: 'test',
+    email: data?.user.email as string,
+    icon_url: 'https://picsum.photos/200'
+  };
+}
+
+export async function islogin(): Promise<boolean> {
+  const { error } = await getClient().auth.getUser();
+  if( error ) return false;
+
+  return true;
+}
+
+export async function logout(): Promise<void>{
+  await getClient().auth.signOut();
+}
+
+export async function register(email: string, password: string): Promise<void> {
+  const {error} = await getClient().auth.signUp({
+    email: email,
+    password: password
+  });
+
+  if (error) throw new Error(error.message);
+}
+
+export async function confirm(type :EmailOtpType, token_hash:string): Promise<void> {
+  const {error} = await getClient().auth.verifyOtp({type, token_hash});
+
+  if (error) throw new Error(error.message);
+}
+
+export async function getMe(): Promise<User|null> {
+  const { data, error } = await getClient().auth.getUser();
     
-    const credentials: SignInWithPasswordCredentials = {
-      email: email,
-      password: password
-    };
-
-    const {data, error}= await this.client.auth.signInWithPassword(credentials);
+  if( error ) return null;
     
-    if( error ) throw new Error(error.message);
-
-    return {
-      uid: data?.user.id,
-      name: 'test',
-      email: data?.user.email as string,
-      icon_url: 'https://picsum.photos/200'
-    };
-  }
-
-  async islogin(): Promise<boolean> {
-    const { error } = await this.client.auth.getUser();
-    if( error ) return false;
-
-    return true;
-  }
-
-  async logout(): Promise<void>{
-    await this.client.auth.signOut();
-  }
-
-  async register(email: string, password: string): Promise<void> {
-    const {error} = await this.client.auth.signUp({
-      email: email,
-      password: password
-    });
-
-    if (error) throw new Error(error.message);
-  }
-
-  async confirm(type :EmailOtpType, token_hash:string): Promise<void> {
-    const {error} = await this.client.auth.verifyOtp({type, token_hash});
-
-    if (error) throw new Error(error.message);
-  }
-
-  async getMe(): Promise<User|null> {
-    const { data, error } = await this.client.auth.getUser();
-    
-    if( error ) return null;
-    
-    return {
-      uid: data?.user.id,
-      name: 'test',
-      email: data?.user.email as string,
-      icon_url: 'https://picsum.photos/200'
-    }
+  return {
+    uid: data?.user.id,
+    name: 'test',
+    email: data?.user.email as string,
+    icon_url: 'https://picsum.photos/200'
   }
 }

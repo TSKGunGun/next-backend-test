@@ -1,6 +1,6 @@
 import { Button } from "@mui/material"
 import { useRouter } from "next/navigation"
-import AuthService from "../_service/AuthService"
+import AuthService from "../_serviceAction/AuthServiceAction"
 
 interface HeaderButtonGroupProps {
   readonly isLogin: boolean;

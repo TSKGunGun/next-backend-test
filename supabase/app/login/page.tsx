@@ -1,20 +1,19 @@
-'use client'
+"use client"
 
 import { useRef } from "react";
 import { Button, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
-import AuthService from "../_service/AuthService";
+import { login } from "@/app/_serviceAction/AuthServiceAction";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
   const router = useRouter();
-  const authService = new AuthService();
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
   const loginHandle = async () => {
     if(email.current === null || password.current === null) return;
-    await authService.login(email.current.value, password.current.value);
+    await login(email.current.value, password.current.value);
 
     router.push('/');
   }

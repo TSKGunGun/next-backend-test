@@ -1,17 +1,16 @@
 import { Box, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
 import Button from "@mui/material/Button";
-import PostService from "../_service/PostService";
-import AuthService from "../_service/AuthService";
+import PostService from "../_serviceAction/PostService";
+import { getMe } from "../_serviceAction/AuthServiceAction";
 
 export default function NewPost() {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const postService = new PostService();
-  const authService = new AuthService();
 
   const handlePost = async () => {
     if(textAreaRef.current === null) return;
-    const user = await authService.getMe();
+    const user = await getMe();
     if(user === null) return;
 
     postService.store(user, textAreaRef.current.value);

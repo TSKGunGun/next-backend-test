@@ -1,12 +1,12 @@
 'use client'
 
 import { Typography } from "@mui/material";
-import PostService from "./_service/PostService";
+import PostService from "./_serviceAction/PostService";
 import PostCard from "./_components/postcard";
 import { Post } from "./_types/post";
 import { Posts } from "./_types/posts";
 import Box from "@mui/material/Box";
-import AuthService from "./_service/AuthService";
+import {isLogin} from "./_serviceAction/AuthServiceAction";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import NewPost from "./_components/new_post";
@@ -15,11 +15,10 @@ export default function Home() {
   const router = useRouter();
   const [posts, setPosts] = useState<Posts>();
   const postService = new PostService();
-  const authService = new AuthService();
 
   useEffect(() => {
     const loading = async () => {
-      if( ! await authService.isLogin()) {
+      if( ! await isLogin()) {
         console.log('ログインしていません');
         router.push('/login');
       }

@@ -1,4 +1,4 @@
-import AuthService from '@/app/_service/AuthService'
+import AuthService from '@/app/_serviceAction/AuthServiceAction'
 import { type EmailOtpType } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 

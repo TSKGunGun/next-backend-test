@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
-import AuthService from "../_service/AuthService";
+import AuthService from "../_serviceAction/AuthServiceAction";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
