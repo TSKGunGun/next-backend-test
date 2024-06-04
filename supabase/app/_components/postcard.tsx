@@ -1,7 +1,7 @@
 import { Post } from "@/app/_types/post";
 import Box from "@mui/material/Box";
 import { Avatar, Typography } from "@mui/material";
-import UserService from "../_service/UserService";
+import UserService from "../_serviceAction/UserService";
 import { useState, useEffect } from "react";
 import { User } from "@/app/_types/user";
 

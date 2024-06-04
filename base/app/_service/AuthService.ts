@@ -29,8 +29,8 @@ export default class AuthService {
     return this.auth.islogin();
   }
   
-  async register(email: string, password: string): Promise<User> {
-    return this.auth.register(email, password);
+  async register(email: string, password: string): Promise<void> {
+    this.auth.register(email, password);
   }
 
   async getMe(): Promise<User|null> {

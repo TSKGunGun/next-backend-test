@@ -1,6 +1,8 @@
+"use client"
+
 import { Button } from "@mui/material"
+import { logout } from "@/app/_serviceAction/AuthServiceAction"
 import { useRouter } from "next/navigation"
-import AuthService from "../_service/AuthService"
 
 interface HeaderButtonGroupProps {
   readonly isLogin: boolean;
@@ -8,8 +10,6 @@ interface HeaderButtonGroupProps {
 
 export default function HeaderButtonGroup({ isLogin } : HeaderButtonGroupProps) {
   const router = useRouter();
-  const authService = new AuthService();
-
   const loginButtonHandle = () => {
     router.push('/login');
   }
@@ -18,8 +18,9 @@ export default function HeaderButtonGroup({ isLogin } : HeaderButtonGroupProps) 
     router.push('/register');
   }
 
-  const logoutButtonHandle = () => {
-    authService.logout();
+  const logoutButtonHandle = async () => {
+    await logout();
+    router.push('/login');
   }
 
   if (isLogin) {

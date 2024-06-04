@@ -18,6 +18,8 @@
     "@fontsource/roboto": "^5.0.13",
     "@mui/material": "^5.15.18",
     "@mui/material-nextjs": "^5.15.11",
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "^2.43.4",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"

@@ -1,7 +1,7 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import React from 'react';
-import Header from './_components/header';
 import './globals.css';
+import Header from './_components/header';
 
 export const metadata = {
   title: "SampleApp on Firebase", 
@@ -15,8 +15,8 @@ export default function RootLayout({ children } : Readonly<{
     <html lang="ja">
       <body>
         <AppRouterCacheProvider>
-            <Header />
-            {children}          
+          <Header />
+          {children}          
         </AppRouterCacheProvider>
       </body>
     </html>
