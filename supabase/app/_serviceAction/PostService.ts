@@ -10,7 +10,6 @@ export default class PostService {
     this.repo = new PostRepository();
   }
 
-
   async store(user:User, message: string) : Promise<Post>{
     const data = {
       user: user,

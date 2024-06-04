@@ -4,15 +4,8 @@ import { EmailOtpType } from "@supabase/supabase-js";
 import {login as loginAct, logout as logoutAct, islogin as isLoginAct,  register as registerAct, confirm as confirmAct, getMe as getMeAct } from "../_repository/AuthRepository";
 import { User } from "../_types/user";
 
-export async function login(email:string, password:string): Promise<User|null> {
-    let user=null;
-    try{
-      user = await loginAct(email, password);
-    } catch(e) {
-      console.error(e);
-      return null;
-    }  
-    return user;
+export async function login(email:string, password:string): Promise<User|null> {    
+    return await loginAct(email, password);
 }
   
 export async function logout(): Promise<void> {
