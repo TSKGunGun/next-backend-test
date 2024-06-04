@@ -1,25 +1,26 @@
 "use client"
 
 import { Button } from "@mui/material"
-import { redirect } from "next/navigation"
 import { logout } from "@/app/_serviceAction/AuthServiceAction"
+import { useRouter } from "next/navigation"
 
 interface HeaderButtonGroupProps {
   readonly isLogin: boolean;
 }
 
 export default function HeaderButtonGroup({ isLogin } : HeaderButtonGroupProps) {
+  const router = useRouter();
   const loginButtonHandle = () => {
-    redirect('/login');
+    router.push('/login');
   }
 
   const registerButtonHandle = () => {
-    redirect('/register');
+    router.push('/register');
   }
 
   const logoutButtonHandle = () => {
     logout();
-    redirect('/login');
+    router.push('/login');
   }
 
   if (isLogin) {
