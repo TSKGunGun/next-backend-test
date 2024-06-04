@@ -18,11 +18,6 @@ export default function Home() {
 
   useEffect(() => {
     const loading = async () => {
-      if( ! await isLogin()) {
-        console.log('ログインしていません');
-        router.push('/login');
-      }
-
       setPosts(await postService.getAll());
     }
 

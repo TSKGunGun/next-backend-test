@@ -18,8 +18,8 @@ export default function HeaderButtonGroup({ isLogin } : HeaderButtonGroupProps) 
     router.push('/register');
   }
 
-  const logoutButtonHandle = () => {
-    logout();
+  const logoutButtonHandle = async () => {
+    await logout();
     router.push('/login');
   }
 

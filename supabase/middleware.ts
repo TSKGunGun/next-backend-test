@@ -1,8 +1,24 @@
-import type { NextRequest } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import { updateSession } from '@/app/_utils/supabase/middleware'; 
+import { isLogin } from './app/_serviceAction/AuthServiceAction';
 
 export async function middleware(request: NextRequest) {
-  return updateSession(request);
+  const isLoggedIn = await isLogin();
+  
+  if(isLoggedIn && request.nextUrl.pathname.startsWith('/login'))  {
+    return NextResponse.redirect(new URL('/', request.url)); 
+  }
+  
+  if(isLoggedIn && request.nextUrl.pathname.startsWith('/register'))  {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+  
+  if(!isLoggedIn && request.nextUrl.pathname === '/')  {
+    console.log(request.nextUrl.pathname);
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  let res = await updateSession(request);
 }
 
 export const config = {
