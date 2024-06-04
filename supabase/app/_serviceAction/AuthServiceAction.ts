@@ -1,29 +1,68 @@
 "use server"
 
-import { EmailOtpType } from "@supabase/supabase-js";
-import {login as loginAct, logout as logoutAct, islogin as isLoginAct,  register as registerAct, confirm as confirmAct, getMe as getMeAct } from "../_repository/AuthRepository";
 import { User } from "../_types/user";
+import { createClient } from '@/app/_utils/supabase/server';
+import type { EmailOtpType, SignInWithPasswordCredentials } from '@supabase/supabase-js';
+
+function getClient() {
+  return createClient();
+} 
 
 export async function login(email:string, password:string): Promise<User|null> {    
-    return await loginAct(email, password);
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  const credentials: SignInWithPasswordCredentials = {
+    email: email,
+    password: password
+  };
+
+  const {data, error}= await getClient().auth.signInWithPassword(credentials);
+  
+  if( error ) throw new Error(error.message);
+
+  return {
+    uid: data?.user.id,
+    name: 'test',
+    email: data?.user.email as string,
+    icon_url: 'https://picsum.photos/200'
+  };
 }
   
 export async function logout(): Promise<void> {
-  return await logoutAct();
+  await getClient().auth.signOut();
 }
   
 export async function isLogin(): Promise<boolean> {
-  return await isLoginAct();
+  const { error } = await getClient().auth.getUser();
+  if( error ) return false;
+
+  return true;
 }
   
 export async function register(email: string, password: string): Promise<void> {
-  return await registerAct(email, password);
+  const {error} = await getClient().auth.signUp({
+    email: email,
+    password: password
+  });
+
+  if (error) throw new Error(error.message);
 }
 
-export async function confirm(type: EmailOtpType, token:string): Promise<void> {
-  return await confirmAct(type, token);
+export async function confirm(type: EmailOtpType, token_hash:string): Promise<void> {
+  const {error} = await getClient().auth.verifyOtp({type, token_hash});
+
+  if (error) throw new Error(error.message);
 }
 
 export async function getMe(): Promise<User|null> {
-  return getMeAct();
+  const { data, error } = await getClient().auth.getUser();
+    
+  if( error ) return null;
+    
+  return {
+    uid: data?.user.id,
+    name: 'test',
+    email: data?.user.email as string,
+    icon_url: 'https://picsum.photos/200'
+  }
 }
