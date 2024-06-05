@@ -1,29 +1,31 @@
 'use client'
 
 import { Typography } from "@mui/material";
-import PostService from "./_serviceAction/PostService";
-import PostCard from "./_components/postcard";
-import { Post } from "./_types/post";
+import { getAll } from "./_serviceAction/PostServiceAction";
+import PostCards from "./_components/postCards";
 import { Posts } from "./_types/posts";
 import Box from "@mui/material/Box";
-import {isLogin} from "./_serviceAction/AuthServiceAction";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import NewPost from "./_components/new_post";
+import NewPost from "./_components/newPost";
 
 export default function Home() {
   const router = useRouter();
   const [posts, setPosts] = useState<Posts>();
-  const postService = new PostService();
+  const [reload, setReload] = useState<boolean>(false);
 
   useEffect(() => {
     const loading = async () => {
-      setPosts(await postService.getAll());
+      setPosts(await getAll());
     }
 
     loading();
-  }, [router]);
+    setReload(false)
+  }, [router, reload]);
 
+  function pageReload() {
+    setReload(true);
+  }
 
   return (
     <div className="container">
@@ -33,15 +35,9 @@ export default function Home() {
         <Typography variant="body1"></Typography>
       </div>
       <Box sx = {{ maxWidth: '700px', margin: '0 auto', marginTop: '20px'}}>
-        <NewPost />
+        <NewPost reload={pageReload} />
       </Box>
-      
-      <Box sx={{display:"flex", flexDirection:"column", alignItems: "center", gap:"20px", marginTop:"50px"}}>
-        <Typography variant="h5">みんなのポスト</Typography>
-          {posts?.data.map( (post: Post) => {
-            return <PostCard key={post.id} post={post} />
-          })}
-      </Box>
+      <PostCards posts={posts} />
     </div>
   )
 }
