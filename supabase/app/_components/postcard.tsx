@@ -1,7 +1,7 @@
 import { Post } from "@/app/_types/post";
 import Box from "@mui/material/Box";
 import { Avatar, Typography } from "@mui/material";
-import UserService from "../_serviceAction/UserService";
+import { find } from "../_serviceAction/UserServiceAction";
 import { useState, useEffect } from "react";
 import { User } from "@/app/_types/user";
 
@@ -10,12 +10,11 @@ type PostCardProps = {
 }
 
 export default function PostCard( {post} : PostCardProps) {
-  const userService = new UserService();
   const [user, setUser] = useState<User>({} as User);
 
   useEffect(() => {
     const loadUser = async () => {
-      setUser(await userService.find(post.uid));
+      setUser(await find(post.uid));
       console.log(user);
     }
 
@@ -34,7 +33,7 @@ export default function PostCard( {post} : PostCardProps) {
           <Typography variant="body1">{post.message}</Typography>
           </Box>
           <Box sx={{ textAlign: "right"}}>
-            <Typography variant="caption">{post.created_at.toLocaleDateString('ja-JP')}</Typography>
+            <Typography variant="caption">{post.created_at.toLocaleDateString('ja-JP') }</Typography>
           </Box>
         </Box>
       </Box>

@@ -33,6 +33,8 @@ export async function logout(): Promise<void> {
 }
   
 export async function isLogin(): Promise<boolean> {
+  console.log('isLogin');
+  
   const { error } = await getClient().auth.getUser();
   if( error ) return false;
 
@@ -55,6 +57,8 @@ export async function confirm(type: EmailOtpType, token_hash:string): Promise<vo
 }
 
 export async function getMe(): Promise<User|null> {
+  console.log('getMe');
+
   const { data, error } = await getClient().auth.getUser();
     
   if( error ) return null;
