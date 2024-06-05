@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
 import Button from "@mui/material/Button";

@@ -2,13 +2,12 @@
 
 import { Typography } from "@mui/material";
 import { getAll } from "./_serviceAction/PostServiceAction";
-import PostCard from "./_components/postcard";
-import { Post } from "./_types/post";
+import PostCards from "./_components/postCards";
 import { Posts } from "./_types/posts";
 import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import NewPost from "./_components/new_post";
+import NewPost from "./_components/newPost";
 
 export default function Home() {
   const router = useRouter();
@@ -28,7 +27,6 @@ export default function Home() {
     setReload(true);
   }
 
-
   return (
     <div className="container">
       <div style={{ textAlign: "center", width: "100%", marginTop: "80px"}}>
@@ -39,13 +37,7 @@ export default function Home() {
       <Box sx = {{ maxWidth: '700px', margin: '0 auto', marginTop: '20px'}}>
         <NewPost reload={pageReload} />
       </Box>
-      
-      <Box sx={{display:"flex", flexDirection:"column", alignItems: "center", gap:"20px", marginTop:"50px"}}>
-        <Typography variant="h5">みんなのポスト</Typography>
-          {posts?.data.map( (post: Post) => {
-            return <PostCard key={post.id} post={post} />
-          })}
-      </Box>
+      <PostCards posts={posts} />
     </div>
   )
 }
