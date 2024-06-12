@@ -1,0 +1,50 @@
+{
+  "name": "supabase",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:json": "next lint -f json -o report/eslint-report.json",
+    "prettier": "prettier --write .",
+    "test": "NODE_ENV=develope vitest",
+    "test:cov": "NODE_ENV=develope vitest run --coverage",
+    "generate": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.10.4",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.13",
+    "@graphql-codegen/client-preset": "^4.2.6",
+    "@mui/material": "^5.15.18",
+    "@mui/material-nextjs": "^5.15.11",
+    "@parcel/watcher": "^2.4.1",
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "^2.43.4",
+    "dotenv": "^16.4.5",
+    "graphql": "^16.8.1",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@testing-library/react": "^15.0.7",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.3.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "jsdom": "^24.1.0",
+    "prettier": "^3.3.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}
