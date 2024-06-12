@@ -498,6 +498,31 @@ export type GetPostsQuery = {
   } | null;
 };
 
+export type AddNewPostMutationVariables = Exact<{
+  uid: Scalars["UUID"]["input"];
+  message: Scalars["String"]["input"];
+  created_at: Scalars["Datetime"]["input"];
+}>;
+
+export type AddNewPostMutation = {
+  __typename: "Mutation";
+  insertIntopostsCollection?: {
+    __typename: "postsInsertResponse";
+    records: Array<{
+      __typename: "posts";
+      id: string;
+      message: string;
+      created_at: string;
+      user_info: {
+        __typename: "user_info";
+        uid: string;
+        name?: string | null;
+        icon_url?: string | null;
+      };
+    }>;
+  } | null;
+};
+
 export const GetPostsDocument = {
   kind: "Document",
   definitions: [
@@ -632,3 +657,154 @@ export const GetPostsDocument = {
     },
   ],
 } as unknown as DocumentNode<GetPostsQuery, GetPostsQueryVariables>;
+export const AddNewPostDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "AddNewPost" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "uid" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UUID" } },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "message" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "created_at" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "Datetime" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "__typename" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "insertIntopostsCollection" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "objects" },
+                value: {
+                  kind: "ListValue",
+                  values: [
+                    {
+                      kind: "ObjectValue",
+                      fields: [
+                        {
+                          kind: "ObjectField",
+                          name: { kind: "Name", value: "uid" },
+                          value: {
+                            kind: "Variable",
+                            name: { kind: "Name", value: "uid" },
+                          },
+                        },
+                        {
+                          kind: "ObjectField",
+                          name: { kind: "Name", value: "message" },
+                          value: {
+                            kind: "Variable",
+                            name: { kind: "Name", value: "message" },
+                          },
+                        },
+                        {
+                          kind: "ObjectField",
+                          name: { kind: "Name", value: "created_at" },
+                          value: {
+                            kind: "Variable",
+                            name: { kind: "Name", value: "created_at" },
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "__typename" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "records" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "__typename" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "message" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "created_at" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "user_info" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "__typename" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "uid" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "name" },
+                            },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "icon_url" },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AddNewPostMutation, AddNewPostMutationVariables>;

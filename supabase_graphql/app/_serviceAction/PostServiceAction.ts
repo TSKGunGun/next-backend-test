@@ -3,7 +3,7 @@
 import { Post } from "@/app/_types/post";
 import { Posts } from "@/app/_types/posts";
 import { User } from "../_types/user";
-import { getPostsQuery } from "../_graphql/getPosts";
+import { getPostsQuery, addNewPostMutation } from "../_graphql/Posts";
 import { OrderByDirection } from "../_graphql/__generate__/graphql";
 import { createApolloClient } from "../_utils/apollo/client";
 
@@ -13,7 +13,15 @@ interface NewPostProps {
 }
 
 export async function store(data: NewPostProps): Promise<void> {
-  await setInterval(() => {}, 5000);
+  const client = createApolloClient();
+  await client.mutate({
+    mutation: addNewPostMutation,
+    variables: {
+      uid: data.user.uid,
+      message: data.message,
+      created_at: new Date().toISOString(),
+    },
+  });
 }
 
 export async function getAll(): Promise<Posts> {
@@ -35,7 +43,7 @@ export async function getAll(): Promise<Posts> {
   }
 
   const posts = data.postsCollection?.edges.map((edge) => {
-    const post:Post = {
+    const post: Post = {
       id: Number(edge.node.id),
       message: edge.node.message,
       created_at: new Date(edge.node.created_at),
@@ -46,8 +54,7 @@ export async function getAll(): Promise<Posts> {
     };
 
     return post;
-    }
-  );
+  });
 
   return {
     data: posts!,

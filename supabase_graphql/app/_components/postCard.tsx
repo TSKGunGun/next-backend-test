@@ -7,7 +7,6 @@ type PostCardProps = {
 };
 
 export default function PostCard({ post }: PostCardProps) {
-
   return (
     <Box
       sx={{

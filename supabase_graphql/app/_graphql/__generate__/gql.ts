@@ -15,6 +15,8 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
 const documents = {
   "\n  query GetPosts($orderBy:[postsOrderBy!], $after: Cursor) {\n    postsCollection(orderBy:$orderBy, after: $after) {\n      edges {\n        cursor\n        node {\n          id\n          message\n          created_at\n          user_info {\n            name\n            icon_url\n          }\n        }\n      }\n    }\n  }\n":
     types.GetPostsDocument,
+  "\n  mutation AddNewPost($uid: UUID!, $message:String!, $created_at:Datetime!) {\n    insertIntopostsCollection(\n      objects: [\n        {\n          uid: $uid,\n          message: $message,\n          created_at: $created_at\n        },\n      ]\n    ) {\n      records {\n        id\n        message\n        created_at\n        user_info {\n          uid\n          name\n          icon_url\n        }\n      }\n    }\n  } \n":
+    types.AddNewPostDocument,
 };
 
 /**
@@ -37,6 +39,12 @@ export function gql(source: string): unknown;
 export function gql(
   source: "\n  query GetPosts($orderBy:[postsOrderBy!], $after: Cursor) {\n    postsCollection(orderBy:$orderBy, after: $after) {\n      edges {\n        cursor\n        node {\n          id\n          message\n          created_at\n          user_info {\n            name\n            icon_url\n          }\n        }\n      }\n    }\n  }\n",
 ): (typeof documents)["\n  query GetPosts($orderBy:[postsOrderBy!], $after: Cursor) {\n    postsCollection(orderBy:$orderBy, after: $after) {\n      edges {\n        cursor\n        node {\n          id\n          message\n          created_at\n          user_info {\n            name\n            icon_url\n          }\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n  mutation AddNewPost($uid: UUID!, $message:String!, $created_at:Datetime!) {\n    insertIntopostsCollection(\n      objects: [\n        {\n          uid: $uid,\n          message: $message,\n          created_at: $created_at\n        },\n      ]\n    ) {\n      records {\n        id\n        message\n        created_at\n        user_info {\n          uid\n          name\n          icon_url\n        }\n      }\n    }\n  } \n",
+): (typeof documents)["\n  mutation AddNewPost($uid: UUID!, $message:String!, $created_at:Datetime!) {\n    insertIntopostsCollection(\n      objects: [\n        {\n          uid: $uid,\n          message: $message,\n          created_at: $created_at\n        },\n      ]\n    ) {\n      records {\n        id\n        message\n        created_at\n        user_info {\n          uid\n          name\n          icon_url\n        }\n      }\n    }\n  } \n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
