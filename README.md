@@ -10,13 +10,16 @@ Nextアプリケーション単独でSaasを実装するための検証リポジ
 * Next.js
 * MUI
 * supabase
+* GraphQL
+* Apollo
 
 # 各ディレクトリについて
 
 |ディレクトリ| 概要 |
 |:---------------------|:-----------------------------------------------|
 |[base](/base/)|基本実装のディレクトリです。バックエンドと接続の実装はおこなっていません。|
-|[supabase](/supabase/)|supabaseと接続するパターンの実装です。|
+|[supabase](/supabase/)|supabaseと接続するパターンの実装です。DB接続はsupabase API経由になります。|
+|[supabase_graphql](/supabase_graphql/)|supabaseと接続するパターンの実装です。DB接続はGraphQL(apollo client)を利用します。|
 
 # 構造
 ## データのやり取りについて
