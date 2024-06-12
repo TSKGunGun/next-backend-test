@@ -1,6 +1,8 @@
+import { userInfo } from "user";
+
 export interface Post {
   id: number;
-  uid: string;
   message: string;
   created_at: Date;
+  user_info: userInfo;
 }

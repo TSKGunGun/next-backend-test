@@ -15,12 +15,6 @@ export const getPostsQuery = gql(`
           }
         }
       }
-      pageInfo {
-        startCursor
-        endCursor
-        hasPreviousPage
-        hasNextPage
-      }
     }
   }
 `);

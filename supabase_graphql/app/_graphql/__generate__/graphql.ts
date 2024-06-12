@@ -495,13 +495,6 @@ export type GetPostsQuery = {
         };
       };
     }>;
-    pageInfo: {
-      __typename: "PageInfo";
-      startCursor?: string | null;
-      endCursor?: string | null;
-      hasPreviousPage: boolean;
-      hasNextPage: boolean;
-    };
   } | null;
 };
 
@@ -627,35 +620,6 @@ export const GetPostsDocument = {
                             },
                           ],
                         },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "pageInfo" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "__typename" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "startCursor" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "endCursor" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "hasPreviousPage" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "hasNextPage" },
                       },
                     ],
                   },

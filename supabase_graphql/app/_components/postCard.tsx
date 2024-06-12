@@ -1,24 +1,13 @@
 import { Post } from "@/app/_types/post";
 import Box from "@mui/material/Box";
 import { Avatar, Typography } from "@mui/material";
-import { find } from "../_serviceAction/UserServiceAction";
-import { User } from "@/app/_types/user";
-import { useEffect, useState } from "react";
 
 type PostCardProps = {
   readonly post: Post;
 };
 
 export default function PostCard({ post }: PostCardProps) {
-  const [user, setUser] = useState<User>({} as User);
 
-  useEffect(() => {
-    const loadUser = async () => {
-      setUser(await find(post.uid));
-    };
-
-    loadUser();
-  }, []);
   return (
     <Box
       sx={{
@@ -30,7 +19,7 @@ export default function PostCard({ post }: PostCardProps) {
     >
       <Box sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Avatar src={user.icon_url as string} />
+          <Avatar src={post.user_info.icon_url as string} />
         </Box>
         <Box sx={{ width: "100%" }}>
           <Box>
@@ -40,7 +29,7 @@ export default function PostCard({ post }: PostCardProps) {
               fontSize={14}
               marginBottom="10px"
             >
-              {user.name}
+              {post.user_info.name}
             </Typography>
             <Typography variant="body1">{post.message}</Typography>
           </Box>
