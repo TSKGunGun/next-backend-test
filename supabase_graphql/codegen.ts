@@ -11,11 +11,11 @@ const config: CodegenConfig = {
       },
     },
   ],
-  documents: "src/**/*.tsx",
+  documents: "/**/*.tsx",
   overwrite: true,
   ignoreNoDocuments: true,
   generates: {
-    "src/gql/": {
+    "app/_graphql/": {
       preset: "client",
       documentTransforms: [addTypenameSelectionDocumentTransform],
       plugins: [],
