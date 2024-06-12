@@ -6,19 +6,22 @@ const config: CodegenConfig = {
     {
       [process.env.NEXT_PUBLIC_SUPABASE_GRAPHQL_URL!]: {
         headers: {
-          apiKey: process.env.NEXT_PUBLIC_SUPABASE_API_KEY!,
+          apiKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         },
       },
     },
   ],
-  documents: "/**/*.tsx",
+  documents: "app/_graphql/**/*.ts",
   overwrite: true,
   ignoreNoDocuments: true,
   generates: {
-    "app/_graphql/": {
+    "app/_graphql/__generate__/": {
       preset: "client",
       documentTransforms: [addTypenameSelectionDocumentTransform],
       plugins: [],
+      presetConfig: {
+        gqlTagName: "gql",
+      },
       config: {
         scalars: {
           UUID: "string",
